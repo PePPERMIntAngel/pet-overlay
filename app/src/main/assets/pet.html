@@ -40,17 +40,18 @@ function tapPet(x, y) {
     var gx = x * 64;
     var gy = y * 64;
     var sound = 'tap.mp3';
+    var showFace = true;
     if (gy < 18 && gx < 24) sound = 'ear.mp3';
     else if (gy < 18 && gx > 40) sound = 'ear.mp3';
     else if (gy >= 46 && gy <= 49 && gx >= 22 && gx <= 26) sound = 'paw.mp3';
     else if (gy >= 46 && gy <= 50 && gx >= 37 && gx <= 41) sound = 'paw.mp3';
     else if (gy >= 37 && gy <= 42 && gx >= 25 && gx <= 37) sound = 'belly.mp3';
-    else if (gy >= 30 && gy <= 35) sound = 'face.mp3';
+    else if (gy >= 30 && gy <= 35) { sound = 'face.mp3'; showFace = false; }
     else if (gy > 53) sound = 'tail.mp3';
     var a = document.getElementById('tapAudio');
     a.src = 'sound/' + sound;
     a.play();
-    img.src = FRAMES.face;
+    img.src = showFace ? FRAMES.face : FRAMES.happy;
     setTimeout(function() {
         img.src = FRAMES.idle;
         busy = false;
