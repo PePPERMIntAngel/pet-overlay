@@ -27,56 +27,21 @@ html, body {
 <script>
 var FRAMES = {
     idle: 'frames/pet_idle.svg',
-    blink: 'frames/pet_blink.svg',
     happy: 'frames/pet_happy.svg',
-    wry: 'frames/pet_wry.svg',
-    breathe: 'frames/pet_breathe.svg'
+    wry: 'frames/pet_wry.svg'
 };
 var img = document.getElementById('pet');
-var baseMode = 'idle';
+var busy = false;
 
-function show(name) {
-    img.src = FRAMES[name];
-}
-
-// 基础循环：idle -> 偶尔blink -> 偶尔breathe
-function schedule() {
-    var delay = 1500 + Math.random() * 2000;
-    setTimeout(function() {
-        if (baseMode !== 'idle') return;
-        var r = Math.random();
-        if (r < 0.6) {
-            // 眨眼
-            show('blink');
-            setTimeout(function() {
-                if (baseMode === 'idle') show('idle');
-                schedule();
-            }, 260);
-        } else if (r < 0.8) {
-            // 呼吸
-            show('breathe');
-            setTimeout(function() {
-                if (baseMode === 'idle') show('idle');
-                schedule();
-            }, 600);
-        } else {
-            schedule();
-        }
-    }, delay);
-}
-schedule();
-
-// 点击：随机给个表情，然后回到idle
 function tapPet() {
-    if (baseMode !== 'idle') return;
-    baseMode = 'paused';
-    var seq = ['happy', 'wry', 'happy', 'blink', 'breathe'];
+    if (busy) return;
+    busy = true;
+    var seq = ['happy', 'wry'];
     var pick = seq[Math.floor(Math.random() * seq.length)];
-    show(pick);
+    img.src = FRAMES[pick];
     setTimeout(function() {
-        baseMode = 'idle';
-        show('idle');
-        schedule();
+        img.src = FRAMES.idle;
+        busy = false;
     }, 1600);
 }
 </script>
