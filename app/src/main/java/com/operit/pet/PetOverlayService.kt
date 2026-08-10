@@ -92,8 +92,8 @@ class PetOverlayService : Service() {
                     if (moved) {
                         true
                     } else {
-                        val relX = (event.rawX - params!!.x) / size
-                        val relY = (event.rawY - params!!.y) / size
+                        val relX = (event.x / size).toDouble().coerceIn(0.0, 1.0)
+                        val relY = (event.y / size).toDouble().coerceIn(0.0, 1.0)
                         webView.loadUrl("javascript:tapPet($relX,$relY)")
                         true
                     }
