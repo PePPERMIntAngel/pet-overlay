@@ -24,6 +24,7 @@ html, body {
 </head>
 <body>
 <img id="pet" src="frames/pet_idle.svg" draggable="false">
+<audio id="tapAudio" src="sound/tap.mp3" preload="auto"></audio>
 <script>
 var FRAMES = {
     idle: 'frames/pet_idle.svg',
@@ -35,6 +36,7 @@ var busy = false;
 function tapPet() {
     if (busy) return;
     busy = true;
+    try { document.getElementById('tapAudio').play(); } catch(e) {}
     img.src = FRAMES.happy;
     setTimeout(function() {
         img.src = FRAMES.idle;
