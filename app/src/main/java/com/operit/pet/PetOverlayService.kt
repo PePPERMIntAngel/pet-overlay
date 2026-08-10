@@ -113,7 +113,7 @@ class PetOverlayService : Service() {
     private fun createChannel() {
         val channel = NotificationChannel(
             "pet_channel",
-            "小圆家的蓝猫猫",
+            "X-YOU",
             NotificationManager.IMPORTANCE_LOW
         )
         getSystemService(NotificationManager::class.java).createNotificationChannel(channel)
@@ -126,7 +126,7 @@ class PetOverlayService : Service() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
         return Notification.Builder(this, "pet_channel")
-            .setContentTitle("小圆家的蓝猫猫在桌面上陪你")
+            .setContentTitle("X-YOU在桌面上陪你")
             .setContentText("点一下它，它会冲你笑")
             .setSmallIcon(R.drawable.ic_pet_small)
             .setContentIntent(pi)
