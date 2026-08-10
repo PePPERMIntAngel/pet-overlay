@@ -48,7 +48,7 @@ class PetOverlayService : Service() {
         ws.domStorageEnabled = true
         webView.loadUrl("file:///android_asset/pet.html")
 
-        val size = (resources.displayMetrics.density * 120).toInt()
+        val size = (resources.displayMetrics.density * 72).toInt()
 
         params = WindowManager.LayoutParams(
             size,
@@ -92,7 +92,9 @@ class PetOverlayService : Service() {
                     if (moved) {
                         true
                     } else {
-                        webView.loadUrl("javascript:tapPet()")
+                        val relX = (event.rawX - params!!.x) / size
+                        val relY = (event.rawY - params!!.y) / size
+                        webView.loadUrl("javascript:tapPet($relX,$relY)")
                         true
                     }
                 }

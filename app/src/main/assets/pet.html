@@ -24,20 +24,33 @@ html, body {
 </head>
 <body>
 <img id="pet" src="frames/pet_idle.svg" draggable="false">
-<audio id="tapAudio" src="sound/tap.mp3" preload="auto"></audio>
+<audio id="tapAudio" preload="auto"></audio>
 <script>
 var FRAMES = {
     idle: 'frames/pet_idle.svg',
-    happy: 'frames/pet_happy.svg'
+    happy: 'frames/pet_happy.svg',
+    face: 'frames/pet_face.svg'
 };
 var img = document.getElementById('pet');
 var busy = false;
 
-function tapPet() {
+function tapPet(x, y) {
     if (busy) return;
     busy = true;
-    try { document.getElementById('tapAudio').play(); } catch(e) {}
-    img.src = FRAMES.happy;
+    var gx = x * 64;
+    var gy = y * 64;
+    var sound = 'tap.mp3';
+    if (gy < 18 && gx < 24) sound = 'ear.mp3';
+    else if (gy < 18 && gx > 40) sound = 'ear.mp3';
+    else if (gy >= 46 && gy <= 49 && gx >= 22 && gx <= 26) sound = 'paw.mp3';
+    else if (gy >= 46 && gy <= 50 && gx >= 37 && gx <= 41) sound = 'paw.mp3';
+    else if (gy >= 37 && gy <= 42 && gx >= 25 && gx <= 37) sound = 'belly.mp3';
+    else if (gy >= 30 && gy <= 35) sound = 'face.mp3';
+    else if (gy > 53) sound = 'tail.mp3';
+    var a = document.getElementById('tapAudio');
+    a.src = 'sound/' + sound;
+    a.play();
+    img.src = FRAMES.face;
     setTimeout(function() {
         img.src = FRAMES.idle;
         busy = false;
