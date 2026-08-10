@@ -48,7 +48,7 @@ class PetOverlayService : Service() {
         ws.domStorageEnabled = true
         webView.loadUrl("file:///android_asset/pet.html")
 
-        val size = (resources.displayMetrics.density * 180).toInt()
+        val size = (resources.displayMetrics.density * 120).toInt()
 
         params = WindowManager.LayoutParams(
             size,
@@ -111,7 +111,7 @@ class PetOverlayService : Service() {
     private fun createChannel() {
         val channel = NotificationChannel(
             "pet_channel",
-            "蓝猫猫桌宠",
+            "小圆家的蓝猫猫",
             NotificationManager.IMPORTANCE_LOW
         )
         getSystemService(NotificationManager::class.java).createNotificationChannel(channel)
@@ -124,7 +124,7 @@ class PetOverlayService : Service() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
         return Notification.Builder(this, "pet_channel")
-            .setContentTitle("蓝猫猫在桌面上陪你")
+            .setContentTitle("小圆家的蓝猫猫在桌面上陪你")
             .setContentText("点一下它，它会冲你笑")
             .setSmallIcon(R.drawable.ic_pet_small)
             .setContentIntent(pi)

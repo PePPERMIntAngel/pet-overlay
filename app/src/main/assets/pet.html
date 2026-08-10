@@ -27,8 +27,7 @@ html, body {
 <script>
 var FRAMES = {
     idle: 'frames/pet_idle.svg',
-    happy: 'frames/pet_happy.svg',
-    wry: 'frames/pet_wry.svg'
+    happy: 'frames/pet_happy.svg'
 };
 var img = document.getElementById('pet');
 var busy = false;
@@ -36,9 +35,7 @@ var busy = false;
 function tapPet() {
     if (busy) return;
     busy = true;
-    var seq = ['happy', 'wry'];
-    var pick = seq[Math.floor(Math.random() * seq.length)];
-    img.src = FRAMES[pick];
+    img.src = FRAMES.happy;
     setTimeout(function() {
         img.src = FRAMES.idle;
         busy = false;
